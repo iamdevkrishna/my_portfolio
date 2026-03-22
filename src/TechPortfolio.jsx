@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
-import { Download, Github, Linkedin, Terminal, Video, MapPin, Sparkles, ArrowRight, Layers, Database, ExternalLink, Award, FileText, X } from 'lucide-react';
+// Reverted to Github and Linkedin to prevent the white-screen crash!
+import { Download, Github, Linkedin, Terminal, Video, MapPin, Sparkles, ArrowRight, Layers, Database, ExternalLink, Award, FileText, X, Cpu, Code2, Wrench } from 'lucide-react';
 
 const TechPortfolio = ({ fadeUp, setIsHovering }) => {
   // State to handle our pop-up document viewer
@@ -76,20 +78,96 @@ const TechPortfolio = ({ fadeUp, setIsHovering }) => {
                   <span className="bento-inner px-3 py-1">TensorFlow (Keras)</span><span className="bento-inner px-3 py-1">LSTM</span><span className="bento-inner px-3 py-1">MediaPipe</span>
                 </div>
               </div>
-              <a href="https://github.com/iamdevkrishna" target="_blank" rel="noreferrer" className="mt-6 md:mt-0 inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors border border-white/10 md:cursor-none"><Github size={16} /> Repository</a>
+              <a href="https://github.com/iamdevkrishna/PlayCam-Cricket-Shot-Prediction-Model" target="_blank" rel="noreferrer" className="mt-6 md:mt-0 inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors border border-white/10 md:cursor-none"><Github size={16} /> Repository</a>
             </div>
           </div>
-          <div className="bento-card p-8 group hover:border-pink-500/30 transition-all duration-300" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-            <div className="bento-inner w-12 h-12 rounded-xl flex items-center justify-center mb-6 text-pink-400 group-hover:scale-110 transition-transform"><Terminal size={20} /></div>
-            <h3 className="text-2xl font-bold mb-3 text-white">P.R.I.M.E | AI Voice Assistant</h3>
-            <p className="text-gray-400 mb-6 text-sm leading-relaxed">Developed a voice-controlled AI assistant to automate Windows tasks. Integrated the Gemini API for advanced conversational logic.</p>
-            <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-400"><span className="bento-inner px-3 py-1">Python</span><span className="bento-inner px-3 py-1">Gemini API</span></div>
+
+          {/* P.R.I.M.E Project Card (Updated with Repo Link) */}
+          <div className="bento-card p-8 group hover:border-pink-500/30 transition-all duration-300 flex flex-col justify-between" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <div>
+              <div className="bento-inner w-12 h-12 rounded-xl flex items-center justify-center mb-6 text-pink-400 group-hover:scale-110 transition-transform"><Terminal size={20} /></div>
+              <h3 className="text-2xl font-bold mb-3 text-white">P.R.I.M.E | AI Voice Assistant</h3>
+              <p className="text-gray-400 mb-6 text-sm leading-relaxed">Developed a voice-controlled AI assistant to automate Windows tasks. Integrated the Gemini API for advanced conversational logic.</p>
+            </div>
+
+            {/* Flex wrapper for perfectly aligned tags and button */}
+            <div className="flex justify-between items-end mt-4">
+              <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-400">
+                <span className="bento-inner px-3 py-1">Python</span>
+                <span className="bento-inner px-3 py-1">Gemini API</span>
+              </div>
+              <a href="https://github.com/iamdevkrishna/P.R.I.M.E-Windows-Assistant" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-white/10 md:cursor-none shrink-0 ml-4">
+                <Github size={16} /> Code
+              </a>
+            </div>
           </div>
+
+          {/* Freelance System Card (Updated with Placeholder Repo Link) */}
+          <div className="bento-card p-8 group hover:border-teal-500/30 transition-all duration-300 flex flex-col justify-between" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <div>
+              <div className="bento-inner w-12 h-12 rounded-xl flex items-center justify-center mb-6 text-teal-400 group-hover:scale-110 transition-transform"><Database size={20} /></div>
+              <h3 className="text-2xl font-bold mb-3 text-white">Freelance Collaboration System</h3>
+              <p className="text-gray-400 mb-6 text-sm leading-relaxed">Developed a backend architecture using Django to bridge the gap between freelancers and clients. Features secure login and workflow automation.</p>
+            </div>
+
+            {/* Flex wrapper for perfectly aligned tags and button */}
+            <div className="flex justify-between items-end mt-4">
+              <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-400">
+                <span className="bento-inner px-3 py-1">Django</span>
+                <span className="bento-inner px-3 py-1">PostgreSQL</span>
+              </div>
+              <a href="https://github.com/iamdevkrishna" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-white/10 md:cursor-none shrink-0 ml-4">
+                <Github size={16} /> Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Skills Arsenal */}
+      <motion.section id="skills" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp} className="py-24 border-t border-white/5">
+        <div className="text-center mb-16">
+          <h2 className="text-sm font-bold tracking-widest text-indigo-400 uppercase mb-3 flex items-center justify-center gap-2"><Cpu size={16}/> Arsenal</h2>
+          <h3 className="text-4xl font-bold text-white">Technical Skills</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* AI & Data */}
+          <div className="bento-card p-8 group hover:border-indigo-500/30 transition-all duration-300" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="bento-inner w-10 h-10 rounded-xl flex items-center justify-center text-indigo-400"><Database size={18} /></div>
+              <h3 className="text-xl font-bold text-white">AI & Machine Learning</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {['Python', 'TensorFlow', 'Keras', 'MediaPipe', 'Scikit-Learn', 'Pandas', 'NumPy', 'OpenCV'].map(skill => (
+                <span key={skill} className="bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors cursor-default">{skill}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Core & Web */}
+          <div className="bento-card p-8 group hover:border-pink-500/30 transition-all duration-300" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="bento-inner w-10 h-10 rounded-xl flex items-center justify-center text-pink-400"><Code2 size={18} /></div>
+              <h3 className="text-xl font-bold text-white">Development & Web</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {['React.js', 'Django', 'JavaScript', 'C++', 'HTML/CSS', 'Tailwind', 'REST APIs'].map(skill => (
+                <span key={skill} className="bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors cursor-default">{skill}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Tools & Workflow */}
           <div className="bento-card p-8 group hover:border-teal-500/30 transition-all duration-300" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-            <div className="bento-inner w-12 h-12 rounded-xl flex items-center justify-center mb-6 text-teal-400 group-hover:scale-110 transition-transform"><Database size={20} /></div>
-            <h3 className="text-2xl font-bold mb-3 text-white">Freelance Collaboration System</h3>
-            <p className="text-gray-400 mb-6 text-sm leading-relaxed">Developed a backend architecture using Django to bridge the gap between freelancers and clients. Features secure login and workflow automation.</p>
-            <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-400"><span className="bento-inner px-3 py-1">Django</span><span className="bento-inner px-3 py-1">PostgreSQL</span></div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="bento-inner w-10 h-10 rounded-xl flex items-center justify-center text-teal-400"><Wrench size={18} /></div>
+              <h3 className="text-xl font-bold text-white">Tools & Creative</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {['Git & GitHub', 'PostgreSQL', 'Vercel', 'Premiere Pro', 'After Effects', 'Blender', 'DaVinci Resolve'].map(skill => (
+                <span key={skill} className="bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors cursor-default">{skill}</span>
+              ))}
+            </div>
           </div>
         </div>
       </motion.section>
@@ -157,10 +235,10 @@ const TechPortfolio = ({ fadeUp, setIsHovering }) => {
       </motion.section>
 
       {/* ========================================== */}
-      {/* THE POP-UP VIEWER MODAL */}
+      {/* THE POP-UP VIEWER MODAL (PORTAL FIX)  */}
       {/* ========================================== */}
-      {selectedDoc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10" onMouseEnter={() => setIsHovering(false)}>
+      {selectedDoc && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10" onMouseEnter={() => setIsHovering(false)}>
           <div className="relative w-full max-w-5xl h-[85vh] bg-neutral-900 rounded-xl border border-white/10 shadow-2xl overflow-hidden flex flex-col">
 
             {/* Header */}
@@ -184,7 +262,8 @@ const TechPortfolio = ({ fadeUp, setIsHovering }) => {
             </div>
 
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
     </motion.div>
