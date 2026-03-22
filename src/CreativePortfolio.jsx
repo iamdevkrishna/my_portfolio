@@ -9,9 +9,19 @@ const CreativePortfolio = ({ fadeUp, setIsHovering }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // ==========================================
-  // FETCH LIVE DATA FROM GOOGLE SHEETS
+  // AUTO-CONVERT ANY YOUTUBE LINK TO EMBED
   // ==========================================
-// ==========================================
+  const getSafeEmbedUrl = (rawUrl) => {
+    if (!rawUrl) return "";
+    // Extracts the 11-character video ID from ANY standard, shortened, or Shorts link
+    const match = rawUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([^&?\n]{11})/);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}?controls=1&showinfo=0&rel=0`;
+    }
+    return rawUrl; // Returns original if parsing fails
+  };
+
+  // ==========================================
   // FETCH LIVE DATA FROM GOOGLE SHEETS
   // ==========================================
   useEffect(() => {
@@ -90,13 +100,22 @@ const CreativePortfolio = ({ fadeUp, setIsHovering }) => {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ delay: index * 0.05 }}
                   className="group"
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
+                  // Hover effects removed from the wrapper to fix the cursor issue
                 >
-                  <div className="aspect-video bg-neutral-900 rounded-lg overflow-hidden relative border border-white/5 transition-all group-hover:border-white/20 shadow-xl group-hover:scale-[1.02]">
-                    <iframe className="w-full h-full" src={video.URL} title={video.Title} frameBorder="0" allowFullScreen></iframe>
+                 <div
+                    className="aspect-video bg-neutral-900 rounded-lg overflow-hidden relative border border-white/5 transition-all group-hover:border-white/20 shadow-xl group-hover:scale-[1.02]"
+                    onMouseEnter={() => setIsHovering('hide')}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    <iframe className="w-full h-full relative z-20" src={getSafeEmbedUrl(video.URL)} title={video.Title} frameBorder="0" allowFullScreen></iframe>
                   </div>
-                  <div className="mt-4 px-1">
+
+                  {/* Hover effects moved here: only triggers on the text area! */}
+                  <div
+                    className="mt-4 px-1"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
                     <h3 className="text-xl font-bold text-white mb-1 group-hover:text-gray-300 transition-colors">{video.Title}</h3>
                     <p className="text-gray-500 text-sm font-medium tracking-wide uppercase">{video.Category}</p>
                   </div>

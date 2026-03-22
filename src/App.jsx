@@ -100,14 +100,16 @@ const App = () => {
       <Particles />
 
       {/* ULTRA-FAST DYNAMIC CURSOR */}
+      {/* ULTRA-FAST DYNAMIC CURSOR */}
       <motion.div
         className={`fixed top-0 left-0 w-8 h-8 rounded-full border pointer-events-none z-[100] mix-blend-screen hidden md:flex items-center justify-center backdrop-blur-sm ${activeMode === 'tech' ? 'border-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.6)]' : 'border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]'}`}
         style={{ x: cursorXSpring, y: cursorYSpring }}
         animate={{
-          scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? (activeMode === 'tech' ? "rgba(99,102,241,0.1)" : "rgba(255,255,255,0.1)") : "transparent"
+          scale: isHovering === true ? 1.5 : (isHovering === 'hide' ? 0 : 1),
+          opacity: isHovering === 'hide' ? 0 : 1,
+          backgroundColor: isHovering === true ? (activeMode === 'tech' ? "rgba(99,102,241,0.1)" : "rgba(255,255,255,0.1)") : "transparent"
         }}
-        transition={{ scale: { type: "tween", duration: 0.2 } }}
+        transition={{ scale: { type: "tween", duration: 0.2 }, opacity: { duration: 0.2 } }}
       >
         <div className="w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_10px_#fff]" />
       </motion.div>
